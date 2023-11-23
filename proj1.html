@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login and Registration Form</title>
+  <style>
+ 
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f4f4f4;
+    }
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="submit"] {
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    input[type="submit"] {
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="registerForm">
+    <h2>Register</h2>
+    <input type="text" id="regUsername" placeholder="Username" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="password" id="regPassword" placeholder="Password" required>
+    <input type="submit" value="Register">
+  </form>
+
+  <form id="loginForm" style="display: none;">
+    <h2>Login</h2>
+    <input type="text" id="loginUsername" placeholder="Username" required>
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <input type="submit" value="Login">
+  </form>
+
+  <script>
+    // Function to handle registration
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('regUsername').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      
+      // Retrieve existing users from localStorage or initialize an empty array
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      
+      // Check if the username already exists
+      const existingUser = users.find(user => user.username === username);
+      const existingUser2 = users.find(user => user.email === email);
+      if (existingUser) {
+        alert('Username already exists! Please choose a different one.');
+        return;
+      }
+      if (existingUser2) {
+        alert('Email already exists! Please choose a different one.');
+        return;
+      }
+      // Add the new user to the array
+      users.push({ username, email, password });
+      
+      // Save updated user data to localStorage
+      localStorage.setItem('users', JSON.stringify(users));
+      
+      alert('Registration successful! Please login.');
+      document.getElementById('registerForm').reset();
+      document.getElementById('registerForm').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    });
+
+    // Function to handle login
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      // Retrieve users from localStorage
+      const users = JSON.parse(localStorage.getItem('users')) || [];
+      
+      // Check if the provided username and password match any stored user
+      const authenticatedUser = users.find(user => user.username === username && user.password === password);
+      
+      if (authenticatedUser) {
+        alert('Login successful!');
+        // You can redirect the user to another page or perform other actions upon successful login
+      } else {
+        alert('Invalid username or password. Please try again.');
+      }
+    });
+  </script>
+
+</body>
+</html>
