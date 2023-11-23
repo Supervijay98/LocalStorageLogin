@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Toggle Theme</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        i{
+            font-size: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <!-- <h1>Light/Dark Toggle Theme</h1> -->
+    <i class='bx bx-sun' id="toggleDark"></i>
+</body>
+<script >
+    const toggle=document.getElementById("toggleDark");
+    const body=document.querySelector("body");
+
+    toggle.addEventListener("click",function(){
+        this.classList.toggle("bx-moon");
+        if(this.classList.toggle("bx-sun")){
+            body.style.background="white"
+            body.style.color="black"
+            body.style.transition="0.7s"
+        }else{
+            body.style.background="black"
+            body.style.color="white" 
+            body.style.transition="0.7s"
+        }
+       
+    })
+</script>
+</html>

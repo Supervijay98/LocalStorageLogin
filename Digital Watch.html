@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: lightsalmon;
+            height: 100vh;
+        }
+        span{
+            color: brown;
+            margin: 0px 20px;
+            font-size: 100px;
+            font-family: cooper;
+            text-shadow: 0px 2px 6px rgb(87, 64, 64);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <span id="hour">00</span>
+        <span id="">::</span>
+        <span id="minutes">00</span>
+        <span id="">::</span>
+        <span id="seconds">00</span>
+        <span id="session">PM</span>
+    </div>
+    <script>
+        function displaTime(){
+            var datetime=new Date;
+            var hrs=datetime.getHours();
+            var min=datetime.getMinutes();
+            var sec=datetime.getSeconds();
+            var session=document.getElementById("session")
+
+            if(hrs >=12){
+                session.innerHTML="PM"
+            }else{
+                session.innerHTML="AM"
+            }
+            if(hrs >12){
+                hrs-=12
+            }
+
+            document.getElementById("hour").innerHTML=hrs
+            document.getElementById("minutes").innerHTML=min
+            document.getElementById("seconds").innerHTML=sec
+        }
+        setInterval(displaTime,10);
+    </script>
+</body>
+</html>
